@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>amongus</artifactId>
+    <artifactId>AmongUsss</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>amongus</name>
-    <description>amongus</description>
+    <name>AmongUsss</name>
+    <description>AmongUsss</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -35,6 +35,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>

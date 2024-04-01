@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Among Us</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<audio autoplay loop>
+    <source src="amongUsTheme.mp3" type="audio/mpeg">
+</audio>
+<div id="gameContainer">
+    <div id="userContainer"></div>
+</div>
+
+<div class="chat-container">
+    <ul class="messages"></ul>
+    <div class="message">
+        <input id="messageInput" type="text" placeholder="Type your message...">
+        <button id="sendMessageButton" onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
