@@ -71,30 +71,39 @@ function getImageForUser(username) {
 }
 
 function spawnPlayer(player) {
-    var playerElement = document.createElement('div');
-    playerElement.id = `player-${player.id}`;
-    playerElement.style.position = 'absolute';
-    playerElement.style.left = `${player.position.x}px`;
-    playerElement.style.top = `${player.position.y}px`;
+    var existingPlayerElement = document.getElementById(`player-${player.id}`);
+    if (existingPlayerElement) {
+        // Aktualisiere die Position des existierenden Spielers
+        existingPlayerElement.style.left = `${player.position.x}px`;
+        existingPlayerElement.style.top = `${player.position.y}px`;
+    } else {
+        // Spieler existiert nicht, also füge ihn hinzu
+        var playerElement = document.createElement('div');
+        playerElement.id = `player-${player.id}`;
+        playerElement.style.position = 'absolute';
+        playerElement.style.left = `${player.position.x}px`;
+        playerElement.style.top = `${player.position.y}px`;
 
-    const img = document.createElement('img');
-    img.src = getImageForUser(player.name);
-    img.alt = 'Player Image';
-    img.style.width = '50px';
-    img.style.height = '50px';
-    playerElement.appendChild(img);
+        const img = document.createElement('img');
+        img.src = getImageForUser(player.name);
+        img.alt = 'Player Image';
+        img.style.width = '50px';
+        img.style.height = '50px';
+        playerElement.appendChild(img);
 
-    const usernameElement = document.createElement('div');
-    usernameElement.innerText = player.name;
-    usernameElement.style.textAlign = 'center';
-    usernameElement.style.width = '100%';
-    usernameElement.style.position = 'absolute';
-    usernameElement.style.left = '0';
-    usernameElement.style.top = '50px';
-    playerElement.appendChild(usernameElement);
+        const usernameElement = document.createElement('div');
+        usernameElement.innerText = player.name;
+        usernameElement.style.textAlign = 'center';
+        usernameElement.style.width = '100%';
+        usernameElement.style.position = 'absolute';
+        usernameElement.style.left = '0';
+        usernameElement.style.top = '50px';
+        playerElement.appendChild(usernameElement);
 
-    document.body.appendChild(playerElement);
+        document.body.appendChild(playerElement);
+    }
 }
+
 
 
 document.addEventListener('keydown', function (event) {
