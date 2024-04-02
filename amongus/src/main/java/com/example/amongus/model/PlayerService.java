@@ -2,8 +2,6 @@ package com.example.amongus.model;
 
 import org.springframework.stereotype.Service;
 
-
-
 import java.util.HashSet;
 import java.util.Set;
 
