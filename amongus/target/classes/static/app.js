@@ -73,16 +73,22 @@ function getImageForUser(username) {
 function spawnPlayer(player) {
     var existingPlayerElement = document.getElementById(`player-${player.id}`);
     if (existingPlayerElement) {
-        // Aktualisiere die Position des existierenden Spielers
         existingPlayerElement.style.left = `${player.position.x}px`;
         existingPlayerElement.style.top = `${player.position.y}px`;
     } else {
-        // Spieler existiert nicht, also füge ihn hinzu
         var playerElement = document.createElement('div');
         playerElement.id = `player-${player.id}`;
+        playerElement.classList.add('player');
+
         playerElement.style.position = 'absolute';
         playerElement.style.left = `${player.position.x}px`;
         playerElement.style.top = `${player.position.y}px`;
+
+        // Setze die gewünschten Border-Radius-Eigenschaften für den Spieler
+        playerElement.style.borderTopLeftRadius = '50% 30%';
+        playerElement.style.borderTopRightRadius = '50% 30%';
+        playerElement.style.borderBottomLeftRadius = '30% 50%';
+        playerElement.style.borderBottomRightRadius = '30% 50%';
 
         const img = document.createElement('img');
         img.src = getImageForUser(player.name);
@@ -100,9 +106,10 @@ function spawnPlayer(player) {
         usernameElement.style.top = '50px';
         playerElement.appendChild(usernameElement);
 
-        document.body.appendChild(playerElement);
+        document.getElementById('gameContainer').appendChild(playerElement);
     }
 }
+
 
 
 
@@ -114,10 +121,26 @@ document.addEventListener('keydown', function (event) {
         var y = parseInt(playerElement.style.top, 10) || 0;
 
         switch (event.key) {
-            case 'ArrowUp': y = Math.max(0, y - speed); break;
-            case 'ArrowDown': y = Math.min(650 - 50, y + speed); break;
-            case 'ArrowLeft': x = Math.max(0, x - speed); break;
-            case 'ArrowRight': x = Math.min(1400 - 50, x + speed); break;
+            case 'ArrowUp':
+                if (!checkCollision(x, y - speed) && checkBoundary(x, y - speed)) {
+                    y = Math.max(0, y - speed);
+                }
+                break;
+            case 'ArrowDown':
+                if (!checkCollision(x, y + speed) && checkBoundary(x, y + speed)) {
+                    y = Math.min(700 - 50, y + speed);
+                }
+                break;
+            case 'ArrowLeft':
+                if (!checkCollision(x - speed, y) && checkBoundary(x - speed, y)) {
+                    x = Math.max(0, x - speed);
+                }
+                break;
+            case 'ArrowRight':
+                if (!checkCollision(x + speed, y) && checkBoundary(x + speed, y)) {
+                    x = Math.min(1600 - 50, x + speed);
+                }
+                break;
             default: return;
         }
 
@@ -126,6 +149,8 @@ document.addEventListener('keydown', function (event) {
         stompClient.send("/app/move", {}, JSON.stringify({ id: currentUserId, position: { x: x, y: y } }));
     }
 });
+
+
 
 
 function sendMessage() {
@@ -147,3 +172,52 @@ function showMessage(message) {
     messageElement.innerText = message.name + ": " + message.text;
     messages.appendChild(messageElement);
 }
+
+function checkCollision(playerX, playerY) {
+    var walls = document.querySelectorAll('#walls rect, #walls line');
+    for (var i = 0; i < walls.length; i++) {
+        var wall = walls[i];
+        var rect = wall.getBoundingClientRect();
+        if (playerX >= rect.left && playerX + 50 <= rect.right && playerY >= rect.top && playerY + 50 <= rect.bottom) {
+            return true; // Kollision mit einer Wand
+        }
+    }
+    return false; // Keine Kollision
+}
+
+
+function checkBoundary(x, y) {
+    var gameContainer = document.getElementById('gameContainer');
+    var containerRect = gameContainer.getBoundingClientRect();
+    var containerLeft = containerRect.left;
+    var containerTop = containerRect.top;
+    var containerRight = containerLeft + gameContainer.offsetWidth;
+    var containerBottom = containerTop + gameContainer.offsetHeight;
+
+    // Überprüfen, ob der Spieler den Spielbereich verlässt
+    if (x < containerLeft || y < containerTop || x > containerRight || y > containerBottom) {
+        return false; // Kollision mit dem Spielbereichsrand
+    }
+
+    var walls = document.querySelectorAll('#walls rect, #walls line');
+    for (var i = 0; i < walls.length; i++) {
+        var wall = walls[i];
+        var rect = wall.getBoundingClientRect();
+        var wallX = parseFloat(wall.getAttribute('x'));
+        var wallY = parseFloat(wall.getAttribute('y'));
+        var wallWidth = parseFloat(wall.getAttribute('width'));
+        var wallHeight = parseFloat(wall.getAttribute('height'));
+
+        if (x >= wallX && x <= wallX + wallWidth && y >= wallY && y <= wallY + wallHeight) {
+            return false; // Kollision mit einer Wand
+        }
+    }
+    return true; // Keine Kollision
+}
+
+
+
+
+
+
+

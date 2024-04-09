@@ -10,10 +10,19 @@
 </head>
 <body>
 <audio autoplay loop>
-    <source src="amongUsTheme.mp3" type="audio/mpeg">
+    <source src="../../../../../my-react-app/src/amongUsTheme.mp3" type="audio/mpeg">
 </audio>
 <div id="gameContainer">
-    <div id="userContainer"></div>
+    <div id="userContainer">
+        <svg id="walls" width="1600" height="700" viewBox="0 0 1600 700">
+            <!-- Define your walls using SVG elements -->
+            <rect x="100" y="100" width="100" height="400" fill="grey"/>
+            <rect x="300" y="300" width="400" height="50" fill="grey"/>
+            <!-- Define the vertical wall -->
+            <line x1="700" y1="100" x2="700" y2="600" style="stroke:grey;stroke-width:5" class="wall" />
+        </svg>
+
+    </div>
 </div>
 
 <div class="chat-container">

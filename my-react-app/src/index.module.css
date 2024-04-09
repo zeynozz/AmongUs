@@ -1,0 +1,69 @@
+.App {
+    /* Ihre App-Stile hier */
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+}
+
+.centered-input {
+    text-align: center;
+}
+
+.root {
+    background-image: url(https://cdn5.idcgames.com/storage/image/1333/game_home_bg_section_2/default.jpg);
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+input[type="text"] {
+    width: 300px;
+    height: 40px;
+    font-size: 16px;
+    background-color: rgba(43, 43, 43, 0.72);
+    border: 1px solid #ccc; /* Hinzufügen einer Randlinie */
+    border-radius: 5px; /* Runde die Ecken des Eingabefeldes ab */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Hinzufügen von Box-Schatten */
+    margin-bottom: 20px; /* Fügen Sie etwas Abstand unterhalb des Eingabefeldes hinzu */
+    transition: box-shadow 0.3s; /* Hinzufügen einer Übergangseigenschaft für den Box-Schatten */
+
+}
+input[type="text"]:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ändern Sie den Box-Schatten bei Hover */
+}
+
+button {
+    width: 150px; /* Ändern Sie die Breite nach Bedarf */
+    height: 50px; /* Ändern Sie die Höhe nach Bedarf */
+    font-size: 18px; /* Ändern Sie die Schriftgröße nach Bedarf */
+    border: none; /* Entfernen Sie die Standardrandlinie des Buttons */
+    border-radius: 5px; /* Runde die Ecken des Buttons ab */
+    background-color: rgba(180, 77, 13, 0.81); /* Hintergrundfarbe des Buttons */
+    color: #ffffff; /* Textfarbe des Buttons */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Hinzufügen von Box-Schatten */
+    margin-top: 10px; /* Fügen Sie etwas Abstand oberhalb des Buttons hinzu */
+    transition: box-shadow 0.3s; /* Hinzufügen einer Übergangseigenschaft für den Box-Schatten */
+
+}
+
+button:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ändern Sie den Box-Schatten bei Hover */
+}
